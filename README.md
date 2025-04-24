@@ -1,293 +1,304 @@
-Operating-Systems-IT-2244 Day 01
-
-14th of March 2025
+Operating-Systems-IT-2244 Day 02
+16th of March 2025
 Operating Systems IT 2244 
-Day 01 Practical
-
-COMMAND PROMPT PRACTICAL
-
-Practical 01: Creating a Batch Script for Directory Structure Creation
-----------------------------------------------------------------------
-
-Objective:
------------
-The objective of this practical is to create a batch script that automates the process of creating a structured directory hierarchy. 
-The script will create directories based on predefined criteria and standards for each criterion.
-
-Pre-requisites:
----------------
-A text editor (e.g., Notepad++, Visual Studio Code) to write the batch script. We have used Notepad++
-Basic understanding of Windows Batch scripting and file system structure.
-Windows OS (since the batch script is for Windows environments).
-
-Steps to Create the Batch Script:
---------------------------------
-1.Open a Text Editor:
-
-2.Open your preferred text editor (e.g., Notepad++, Visual Studio Code, or Notepad).
-  We have used Notepad++
-
-3.Write the Script:
-
-In the text editor, type the following script. This script uses basic batch commands like mkdir (make directory) and cd (change directory) to create a structured hierarchy.
-
-mkdir criteria_1
-cd criteria_1
-mkdir standard_1
-mkdir standard_2
-cd..
-mkdir criteria_2
-cd criteria_2
-mkdir standard_1
-mkdir standard_2
-cd..
-mkdir criteria_3
-cd criteria_3
-mkdir standard_1
-mkdir standard_2
-mkdir standard_3
-cd..
-mkdir criteria_4
-cd criteria_4
-mkdir standard_1
-mkdir standard_2
-mkdir standard_3
-cd..
-mkdir criteria_5
-cd criteria_5
-mkdir standard_1
-mkdir standard_2
-mkdir standard_3
-cd..
-mkdir criteria_6
-cd criteria_6
-mkdir standard_1
-mkdir standard_2
-mkdir standard_3
+Day 02 Practical
 
 
-Running the Batch Script:
----------------------------
-1.Save the Script:
+Steps to open PuTTY and connect to a server
+===========================================
+1.Open PuTTY – Search for PuTTY and launch it.
 
-After typing the script, save the file with a .bat extension. For example, save it as create_directories.bat
+2.Enter Server Details – Input the IP address (We connect with 172.16.140.150)
 
-2.Execute the Script:
+3.Connect – Click Open
 
-Locate the .bat file in File Explorer.
-Double-click on the file to execute the script.
-The script will automatically create the directory structure in the location where the .bat file is executed.
+4.Login – Enter your username and password (hidden while typing). (Password used: 789*asd)
 
-Batch Script Commands Used:
-----------------------------
-mkdir: Creates directories.
-cd: Changes the current working directory
+5.Access Server – You’re now connected to the server!
 
 
-Conclusion:
---------------
-In this practical, we learned how to create a batch script to automate the creation of a specific directory structure. 
-By using commands like mkdir and cd, we ensured that the directories were organized hierarchically, which is beneficial 
-for maintaining consistent folder structures across projects or teams
+Linux commands learnt
+======================
+
+pwd: The pwd command prints the current working directory
+The default directory when you log:
+/home/username
 
 
-Practical 02: Creating a Batch Script for Age Calculation
------------------------------------------------------------
+ls: The ls command lists files and directories in the current directory
 
-Objective:
------------
-The objective of this batch script is to prompt the user for their birth year and calculate their current age based on the current date. 
-It uses the %date% variable to retrieve the current year and then calculates the difference between the current year and the user's input.
+Common options:
 
-Steps for the script
----------------------
+	ls -l → Detailed list (permissions, owner, size, etc.)
 
-1.Open a Text Editor:
-2.Write the  following Script:
+	ls -a → Show hidden files (files starting with .)
 
-@echo off
-set /p birth_year=Enter your birth year:
-set /a age=%date:~10,4% - %birth_year%
-echo your age is:%age%
-pause
+ls ltr: The command ls -ltr lists files and directories with details, sorted by modification time (oldest first).
 
-Running the Batch Script:
--------------------------
-1.Save the Script:
+Example output:
 
-After typing the script, save the file with a .bat extension.
+	total 2
+	lrwxrwxrwx  1 kalaf kalaf 22 Mar 21 23:57 bin -> /home/kalaf/.local/bin
+	-rw-rwxr--+ 1 kalaf kalaf  0 Mar 21 23:58 file.txt
+	-rw-rwxr--+ 1 kalaf kalaf 38 Mar 22 13:14 abc.txt
 
-2.Execute the Script:
+File creation in Linux
+======================
+The touch command creates an empty file or updates the timestamp of an existing file.
 
-Locate the .bat file in File Explorer.
-Double-click on the file to execute the script.
-It will ask you to input your birth year, and then it will calculate and display your age.
-
-Explanation of the Script:
----------------------------
-
-@echo off: Hides the command execution details for cleaner output.
-set /p birth_year=...: Prompts the user to input their birth year and stores it in the birth_year variable.
-%date:~10,4%: Extracts the current year from the system's date.
-set /a age=%date:~10,4% - %birth_year%: Calculates the user's age by subtracting their birth year from the current year.
-echo Your age is: %age%: Displays the calculated age to the user.
-pause: Pauses the script so the user can view the result before closing the window.
-
-Expected Output:
------------------
-Enter your birth year: 1990
-Your age is: 35
-Press any key to continue...
-
-
-Conclusion:
-In this practical, we created a batch script that calculates a user's age based on their birth year and the current year. 
-We used basic batch scripting commands such as set, echo, and pause to interact with the user and perform arithmetic calculations.
+Syntax: touch filename.txt 
+Eg: touch abc.txt (Creates the  file named "abc")
 
 
 
-Practical 03: Displaying System Information Using a Batch Script
------------------------------------------------------------------
+To Open the File
+================
+The vi command opens the Vi editor and is used to create or open a file
 
-Objective:
-This batch script retrieves and displays key system details such as the username, Windows version, current date, and time.
+Syntax: vi filename.txt
 
-Steps for the script
----------------------
+To Enter Insert Mode (to type/edit):
+Press i (Insert mode)
 
-1.Open a Text Editor:
-2.Write the  following Script:
+To Save & Exit:
+Press Esc, then:
+:wq → Save and exit
 
-@echo off
-echo username : %username%
-echo version : 
-ver
+For Navigation:
+Use arrow keys or h j k l
 
-echo Date : %date%
+Eg:
 
-echo Time : 
-time
-
-pause
-
-
-3.Save the Script:
-Save the file with a .bat extension (e.g., system_info.bat).
-
-4.Run the Script:
-Double-click the .bat file to execute it
-
-Explanation of the Commands
-------------------------------
-
-@echo off – Hides command execution details for a cleaner output.
-echo Username : %username% – Displays the current logged-in username.
-echo Version : – Prints "Version :" as a label.
-ver – Retrieves and displays the Windows OS version.
-echo Date : %date% – Displays the current system date.
-echo Time : – Prints "Time :" as a label.
-time – Displays the system time (may prompt for modification).
-pause – Prevents the window from closing immediately, allowing the user to view the output
-
-
-Expected Output:
------------------
-
-Username : kalaf
-Version :  
-Microsoft Windows [Version 10.0.22631.4890]
-
-Date : Sun 03/24/2025
-
-Time :  
-Current time is: 14:30:45.12
-Enter new time:
-
-
-Conclusion:
-This script is useful for quickly checking system details, such as the username, Windows version, and current date/time, 
-without manually entering commands in the terminal.
+vi xyz.txt
+sample data entered
+John 32 Engineer
+Jane 22 Student
+Bob 33 Doctor
+Mary 25 Teacher
+Alice 32 Nurse
 
 
 
-Practical 04: Changing Color of CMD Console
----------------------------------------------
+To view contents of a File
+==========================
+more: A Linux command that allows you to view a file one page at a time, but only scrolls forward.
+Syntax:
+more filename.txt
 
-Objective: Change the text and background color of the CMD console in Windows.
+Eg:
+more abc.txt
+
+Output:
+{ ~ }  » more xyz.txt                                                                           
+John 32 Engineer
+Jane 22 Student
+Bob 33 Doctor
+Mary 25 Teacher
+Alice 32 Nurse
+
+less: A Linux command that lets you view a file with both forward and backward scrolling, offering more navigation features than more.
+
+To create a CSV file
+======================
+
+Syntax: vi filename.csv
+
+Eg: vi pqr.csv
+
+Searching for Files
+====================
+The find command in Linux is used to search for files and directories in a directory hierarchy
+
+Syntax: 
+
+To Find a file by name:
+find . -name "file.txt"
+
+To find all directories
+find . -type d
+
+Eg:
+To find all CSV files
+find . -name "*.csv"
+
+Output:
+{ ~ }  » find . -name "*.csv"                                                                   
+./pqr.csv
+{ ~ }  » 
+
+
+To retrieve the number of lines in a file
+=========================================
+The wc -l command counts the number of lines in a file or input provided
+
+Syntax: wc -l filename.txt
+
+Eg: 
+wc -l xyz.txt                                                                        
+
+Output:
+{ ~ }  » wc -l xyz.txt                                                                        
+6 xyz.txt
+
+
+To retrieve columns and rows from a file
+=========================================
+
+cut: The cut command is used to extract specific columns or fields from a file or text input.
+
+To retrieve the 2nd column of a CSV file
+
+cut -d ',' -f 2 pqr.csv
+Output:
+{ ~ }  » cut -d ',' -f 2 pqr.csv                                                            
+34
+78
+34
+78
+
+
+To retrieve the 1st and 3rd column of a CSV file
+
+cut -d ',' -f1,3 pqr.csv
+Output:
+{ ~ }  » cut -d ',' -f1,3 pqr.csv                                                             
+23,56
+56,90
+12,14
+09,58
+
+
+awk: It's a text-processing tool that scans, filters, and manipulates data by processing lines and columns based on patterns and actions.
+
+To retrieve the 1st column of a CSV file
+
+awk -F ',' '{print $1}' pqr.csv
+Output:
+{ ~ }  » awk -F ',' '{print $1}' pqr.csv                                                      
+23
+56
+12
+09
+
+Head and Tail commands
+
+head and tail are commands used to display the first or last few lines of a file, respectively.
+
+head -n 5 pqr.csv
+This command displays the first 5 lines of the pqr.csv file. 
+
+Output:
+{ ~ }  » head -n 5 pqr.csv                                                                    
+23,34,56,78
+56,78,90,34
+12,34,14,67
+09,78,58,32
+
+tail -n 2 pqr.csv
+This command displays the last 2 lines of the pqr.csv file.
+
+Output:
+{ ~ }  »   tail -n 2 pqr.csv                                                                  
+12,34,14,67
+09,78,58,32
+
+
+Extracting and appending  from one file to another
+==================================================
+
+cut -d ',' -f 2 pqr.csv >> pqrNew.csv
+This command extracts the second column from pqr.csv and appends the output to the pqrNew.csv file. 
+If pqrNew.csv doesn't exist, it will be created. 
+
+
+Output:
+{ ~ }  » cut -d ',' -f 2 pqr.csv >> pqrNew.csv                                                
+{ ~ }  » more pqrNew.csv                                                                        
+34
+78
+34
+78
+
+
+head -n 3 pqr.csv >> rows.csv
+This command extracts the first 3 lines from pqr.csv and appends them to the rows.csv file. 
+If rows.csv doesn't exist, it will be created. 
+
+Output:
+{ ~ }  » head -n 3 pqr.csv >> rows.csv                                                        
+{ ~ }  » more rows.csv                                                                         
+23,34,56,78
+56,78,90,34
+12,34,14,67
+
+FILE PERMISSIONS
+================
+
+In Linux, file permissions control how users and groups interact with files and directories. These permissions are categorized into 
+read, write, and execute, and they apply to owner, group, and others.
+
+Read (r): Allows the user to view the content of the file or list the contents of a directory
+Write (w): Allows the user to modify the file or add/delete files in a directory.
+Execute (x): Allows the user to execute a file as a program or enter a directory.
+
+File permissions are represented by a 9-character string:
+-rwxr-xr-x
+
+Where:
+The first character represents the file type (e.g., - for regular files, d for directories).
+The next 9 characters are split into three sets of three characters each:
+The first set represents the owner's permissions.
+The second set represents the group's permissions.
+The third set represents the others' permissions.
+
+For Example:
+-rwxr-xr--
+This means:
+
+Owner: read, write, execute (rwx)
+
+Group: read, execute (r-x)
+
+Others: read (r--)
+
+Numeric (Octal) Representation:
+
+Permissions can also be represented using numbers (octal), where each permission has a corresponding value:
+Read (r) = 4
+Write (w) = 2
+Execute (x) = 1
+
+Common Permission Values:
+777: Full permissions (read, write, execute) for everyone.
+755: Full permissions for the owner, read and execute for group and others.
+644: Read and write for the owner, read-only for group and others.
+700: Full permissions for the owner, no permissions for anyone else.
+
+
+COMMAND PROMPT Practical
+=========================
+
+ATTRIB command is used to view or change the attributes of files and directories in Windows.
 
 Steps:
-------
+Create 2 files on your PC named abc.txt and xyz.txt
+Set the hidden attribute of abc.txt to hidden
 
-1.Open CMD:
+now, to make abc.txt visible we can use the following command
+ATTRIB -H xyz.txt:
+This command removes the Hidden attribute from the file xyz.txt.
+Now abc.txt will become visible after running this command.
 
-Press Win + R to open the Run dialog.
+ATTRIB +R abc.txt:
 
-2.Type cmd and press Enter to open the Command Prompt.
+This command adds the Read-only attribute to the file abc.txt.
+Once this is done, the file abc.txt will be marked as read-only, meaning it cannot be modified unless the read-only attribute is removed.
 
-Use the color Command:
 
-3.In the Command Prompt window, type color /? and press Enter to see the help for the color command.
 
-The syntax for changing the color is:
-	--> color [BG][FG]
 
-BG (Background): First digit (0-F) sets the background color.
 
-FG (Foreground/Text): Second digit (0-F) sets the text color.
 
-Color Codes:
--------------
-
-Here are the color codes you can use:
-
-0 = Black
-
-1 = Blue
-
-2 = Green
-
-3 = Aqua
-
-4 = Red
-
-5 = Purple
-
-6 = Yellow
-
-7 = White
-
-8 = Gray
-
-9 = Light Blue
-
-A = Light Green
-
-B = Light Aqua
-
-C = Light Red
-
-D = Light Purple
-
-E = Light Yellow
-
-F = Bright White
-
-Example:
-
-To set the background to black and text to light green, type color 0A and press Enter.
-
-Reset Colors:
----------------
-To reset to the default colors (black background, white text), type color and press Enter.
-
-Note: Changes made with the color command persist only for the current CMD session. Once you close the CMD window, it will revert to default colors.
-
-Conclusion:
--------------
-
-Experiment with different color combinations using the color command to customize the appearance of your CMD console according to your preference.
-
-This documentation should help you effectively change the CMD console's color for your practical exercise.
 
 
 
