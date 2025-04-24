@@ -1,256 +1,256 @@
 Operating Systems IT 2244
-Day 05 Practical
-28/03/2025
+Day 06 Practical
+04/04/2025
 
-1)Find the row of data which has the word "Engineering"
-	Command:
-	grep "Engineering" data.csv 
- 
-	Output:
-	{ ~ }  » grep "Engineering" data.csv                                        
-	102,Bob,25,50000,Engineering
-	105,Eve,28,60000,Engineering
-	108,Hank,32,68000,Engineering
+1.Get the calander and date
+command: 
+cal
+date +%d
 
-	Explanation of Command:
-	grep => A command-line tool used to search for a pattern in a file.
-	"Engineering" => The pattern (keyword) to search for.
-	data.csv => The file where grep will search for the pattern.
-
-2)find the number of columns in first row
-	Command: 
-	awk -F, '{print NF; exit}' data.csv 
-	
-	Output:
-	{ ~ }  » awk -F, '{print NF; exit}' data.csv                               
-	5
-	
-	Explanation of Command:
-	awk => A powerful text-processing command in Linux.
-	-F, => Specifies the field separator as a comma (,) (since it's a CSV file).
-	{print NF; exit} =>
-		NF => Number of fields (columns) in the current row.
-		print NF => Prints the number of columns in the row.
-		exit => Stops awk after processing the first row only (prevents reading the entire file).
-
-3)find the number of columns in each row
-	Command:
-	awk -F ',' {print NF}'
-
-	Output:
-	{ ~ }  » awk -F ',' '{print NF}' data.csv                                      
-	5
-	5
-	5
-	5
-	5
-	5
-	5
-	5
-	5
-	5
-	5
-
-	Explanation of Command:
-	awk => A powerful text-processing command in Linux.
-	-F ',' => Specifies comma (,) as the field separator, which is necessary for CSV files.
-	{print NF} =>
-		NF (Number of Fields) => Represents the number of fields (columns) in each row.
-		print NF => Prints the number of fields for every row in the file.
-
-4)Sorting CSV by Salary in Reverse Order Using the sort Command
-	Command:
-	sort -t',' -k4,4r data.csv
-
-	Output:
-	{ ~ }  » sort -t',' -k4,4r data.csv                                           
-	ID,Name,Age,Salary,Department
-	104,David,40,90000,HR
-	103,Charlie,5,80000,Data Science
-	106,Frank,38,75000,HR
-	107,Grace,27,72000,Data Science
-	110,Jack,31,71000,HR
-	101,Alice,30,70000,Data Science
-	108,Hank,32,68000,Engineering
-	109,Ivy,29,62000,Data Science
-	105,Eve,28,60000,Engineering
-	102,Bob,25,50000,Engineering
-
-	Explanation of Command:
-	1. sort:
-	This is the command that sorts the contents of a file. It reads input, processes it, 
-	and returns a sorted version of that input based on the options provided.
-
-	2. -t',':
-	The -t option specifies the delimiter to be used for separating fields (columns) in the file.
-	',' specifies that the delimiter is a comma, which is typical for CSV (Comma Separated Values) files.
-
-	3. -k4,4:
-	The -k option specifies which columns to sort by. It uses a column number to indicate where the sort should start and end.
-	The syntax is -kstart_column,end_column. For example, -k4,4 means:
-	start_column: Start sorting at the third column.
-	end_column: Stop sorting at the third column as well.
-	So -k4,4 tells sort to only sort based on the forth column.
-
-	 r:
-	This option modifies the sort order:
-	r stands for reverse sorting. This means the sorting will be in descending order (largest to smallest).
-
-5)
-
-	Command:
-	sort -t',' -k4,4n data.csv 
-
-	Output:
-	{ ~ }  » sort -t',' -k4,4n data.csv                                          
-	ID,Name,Age,Salary,Department
-	102,Bob,25,50000,Engineering
-	105,Eve,28,60000,Engineering
-	109,Ivy,29,62000,Data Science
-	108,Hank,32,68000,Engineering
-	101,Alice,30,70000,Data Science
-	110,Jack,31,71000,HR
-	107,Grace,27,72000,Data Science
-	106,Frank,38,75000,HR
-	103,Charlie,5,80000,Data Science
-	104,David,40,90000,HR
-
-	Explanation of Command:
-	1.sort:
-	Sorts the contents of the file.
-
-	2.-t',':
-	Specifies that the columns are separated by commas (CSV format).
-
-	3.-k4,4:
-	Sorts by the 4th column (Salary).
-
-	4.-n:
-	Sorts numerically, from smallest to largest.
-	
-	Note:
-	The sort command treats the first row (header) as a string, so it is sorted before numeric values.
-	This is why the header appears at the top when sorting.
-
-6)
-	Command:
-	sort -t',' -k4,4 -r data.csv
-
-	Output:
-	sort -t',' -k4,4 -r data.csv                                                        
-	ID,Name,Age,Salary,Department
-	104,David,40,90000,HR
-	103,Charlie,5,80000,Data Science
-	106,Frank,38,75000,HR
-	107,Grace,27,72000,Data Science
-	110,Jack,31,71000,HR
-	101,Alice,30,70000,Data Science
-	108,Hank,32,68000,Engineering
-	109,Ivy,29,62000,Data Science
-	105,Eve,28,60000,Engineering
-	102,Bob,25,50000,Engineering
-
-	Explanation of Command:
-	1. sort:
-	This command sorts the rows in a file.
-
-	2. -t',':
-	Sets the comma , as the separator for columns (since it’s a CSV file).
-
-	3. -k4,4:
-	Sorts the data based on the 4th column (which is Salary).
-
-	4. -r:
-	Sorts in reverse order (highest to lowest for numbers, or Z to A for text).
-
-	Note:
-	Without -n: If I don’t use the -n flag, the sort will be lexicographical (alphabetical). This can cause problems when salaries have different lengths.
-	For example:
-	If I have "50000" (5 characters) and "9000" (4 characters), the command would compare them as text.
-	"50000" would come before "9000" because '5' comes before '9' alphabetically.
-
-	With -n: Using -n ensures that the sort is numeric. So, the command will correctly compare the values. For instance:
-	"50000" will correctly come after "9000" because 50000 is a higher number than 9000.
-
-7)
-	Command:
-	sort -t',' -k4,4 -n -r data.csv 
-
-	Output:
-	{ ~ }  » sort -t',' -k4,4 -n -r data.csv                                                     
-	104,David,40,90000,HR
-	103,Charlie,5,80000,Data Science
-	106,Frank,38,75000,HR
-	107,Grace,27,72000,Data Science
-	110,Jack,31,71000,HR
-	101,Alice,30,70000,Data Science
-	108,Hank,32,68000,Engineering
-	109,Ivy,29,62000,Data Science
-	105,Eve,28,60000,Engineering
-	102,Bob,25,50000,Engineering
-	ID,Name,Age,Salary,Department
-
-	Explanation of Command:
-	1. sort:
-	This is the command used to sort the rows of a file.
-
-	2. -t',':
-	Specifies that the columns in the file are separated by commas (,), which is typical for CSV files.
-
-	3. -k4,4:
-	Sorts based on the 4th column only, which is Salary in this case.
-
-	4. -n:
-	Sorts numerically (instead of alphabetically), ensuring that numbers are compared based on their value (e.g., 90000 > 50000).
-
-	5. -r:
-	Sorts in reverse order (from highest to lowest).
-
-	Note:
-	The header (ID,Name,Age,...) is at the bottom because:
-	sort treats the header like a normal row.
-	It tries to compare the word "Salary" to the numbers like 90000, 80000
-	Since "Salary" is not a number, it's treated as lowest in a numeric sort.
-
-8)Multi-Level Reverse Sorting in CSV using sort Command
-	Command:
-	sort -t',' -k5,5 -k2,2 -r data.csv 
-
-	Output:
-	{ ~ }  » sort -t',' -k5,5 -k2,2 -r data.csv                                                
-	110,Jack,31,71000,HR
-	106,Frank,38,75000,HR
-	104,David,40,90000,HR
-	108,Hank,32,68000,Engineering
-	105,Eve,28,60000,Engineering
-	102,Bob,25,50000,Engineering
-	ID,Name,Age,Salary,Department
-	109,Ivy,29,62000,Data Science
-	107,Grace,27,72000,Data Science
-	103,Charlie,5,80000,Data Science
-	101,Alice,30,70000,Data Science
-
-	Explanation of Command:
-	1. sort:
-	This is the command used to sort the lines in a file.
-
-	2. -t',':
-	Tells sort that the columns in the file are separated by commas (,), which is common in CSV files.
-
-	3. -k5,5:
-	Sort the rows by the 5th column (which is the Department column).
-
-	4. -k2,2:
-	If two or more rows have the same department, then sort those rows by the 2nd column (Name).
-
-	5. -r:
-	Sort everything in reverse order (Z to A, or highest to lowest).
-
-
-
-Command:
 Output:
-Explanation of Command:
-	
+{ ~ }  » cal                                                                  ~
+     April 2025
+Su Mo Tu We Th Fr Sa
+       1  2  3  4  5
+ 6  7  8  9 10 11 12
+13 14 15 16 17 18 19
+20 21 22 23 24 25 26
+27 28 29 30
 
+{ ~ }  » date +%d                                                             ~
+06
 
+Explanation:
+1. cal:
+This command displays a calendar in the terminal.
+it shows the current month's calendar.
+
+2. date +%d:
+The date command displays the current date and time.
+The +%d part is an option that formats the output to only show the day of the month.
+%d represents the day of the month, from 01 to 31.
+
+===========================================================================================
+2.Get the student name and marks for the 3 subjects from user then calculate the total and average
+    Output:
+    Enter the name: Isuru
+    Enter the mark for subject1:
+    Enter the mark for subject1:
+    Enter the mark for subject1:
+    Total:
+    Average:
+
+command:
+echo Enter the name:
+read name
+echo Enter the mark for subject1:
+read mark1
+echo Enter the mark for subject2:
+read mark2
+echo Enter the mark for subject3:
+read mark3
+total=$(($mark1+$mark2+$mark3))
+average=$(($total/3))
+echo Total: $total
+echo Average: $average
+
+Output:
+Enter the name:
+zaheeda
+Enter the mark for subject1:
+3
+Enter the mark for subject2:
+4
+Enter the mark for subject3:
+5
+Total: 12
+Average: 4
+
+Explanation:
+First, a new file was created using the command vi ghi.sh. The given code was typed into the file,
+and then it was saved and closed by typing :wq. After that, the file’s permission was changed to 
+777 using the command chmod 777 ghi.sh, so that anyone could read, write, and run the file.
+The script was then run using ./ghi.sh. It asked the user to enter their name and marks for three subjects.
+Once the user entered the information, the script calculated and displayed the total and average marks on the screen.
+
+================================================================================================
+
+3.Create calculator with arithmetic operations.
+command:
+echo Enter the first number:
+read num1
+echo Enter the second  number:
+read num2
+sum=$(($num1+$num2))
+sub=$(($num1-$num2))
+div=$(($num1/$num2))
+mul=$(($num1*$num2))
+echo Summation:$sum
+echo Subtraction:$sub
+echo Division:$div
+echo Multiplication:$mul
+
+output:
+{ ~ }  » ./prgrm4.sh                                                          ~
+Enter the first number:
+45
+Enter the second number:
+4
+Summation: 49
+Substraction: 41
+Division: 11
+Multiplication: 180
+
+Explanation:
+First, a new file was created using the command vi prgrm4.sh The provided code was typed into the file, 
+and it was then saved and closed using the command :wq. To ensure the script could be executed by anyone, 
+its permission was changed to 777 using the command chmod 777 prgrm4.sh 
+The script was then run using ./prgrm4.sh . It prompted the user to enter the first number, and after input, 
+asked for the second number. Once both values were entered, the script performed four arithmetic operations: 
+addition, subtraction, division, and multiplication.
+
+Finally, it displayed the results for each operation:
+
+The sum of the two numbers,
+The difference (first minus second),
+The quotient (first divided by second),
+The product of the two numbers.
+
+==========================================
+4.Get the days based on the use input numbers
+
+command:
+echo Enter the number:
+read num
+if [ "$num" -lt 8 ]; then
+ if [ "$num" -eq 1 ]; then
+        echo "Monday"
+ elif [ "$num" -eq 2 ]; then
+        echo "Tuesday"
+ elif [ "$num" -eq 3 ]; then
+        echo "Wednesday"
+ elif [ "$num" -eq 4 ]; then
+        echo "Thursday"
+ elif [ "$num" -eq 5 ]; then
+        echo "Friday"
+ elif [ "$num" -eq 6 ]; then
+        echo "Saturday"
+ elif [ "$num" -eq 7 ]; then
+        echo "Sunday"
+ fi
+else
+ echo "Invalid Number"
+fi
+
+output:
+{ ~ }  » ./prgrm5.sh  
+Enter the number:
+3
+Wednesday
+
+Explanation:
+First, a new file was created using the command vi prgrm5.sh. The provided code was typed into the file, 
+and it was then saved and closed using the command :wq. 
+To ensure the script could be executed by anyone, its permission was changed to 777 using the command chmod 777 prgrm4.sh.
+The script was then run using ./prgrm4.sh. It prompted the user to enter a number, which was stored in a variable. 
+The script checked if the entered number was less than 8, ensuring it was within the range of 1 to 7.
+If the input was valid (eg: from 1 to 7), the script compared the number to each weekday and printed the corresponding day
+If the input number was 8 or more, the script displayed the message "Invalid Number".
+This allowed the user to quickly get the name of the day based on the number they entered.
+
+=======================================================
+5.Verify wether your username is correct or not 
+command:
+echo Enter user name:
+read name
+username=$(whoami)
+if [ "$name" = "$username" ]; then
+        echo username is correct
+else
+        echo username is incorrect
+fi
+
+output:
+{ ~ }  » ./prgrm6.sh                                                          ~
+Enter username:
+skyline
+username is correct
+
+Explanation:
+First, a new file was created using the command vi prgrm6.sh. The given code was typed into the file, and it was then saved and closed by typing :wq. 
+After that, the file’s permission was changed to 777 using the command chmod 777 checkuser.sh, allowing anyone to read, write, and execute the file.
+The script was then run using ./prgrm6.sh.sh. It prompted the user to enter a username, and the input was stored in the variable name.
+Next, the script used the whoami command to fetch the currently logged-in user's actual username, storing it in the variable username.
+The script then compared the input (name) with the actual system username (username):
+If both matched, the script printed: "username is correct"
+Otherwise, it printed: "username is incorrect"
+
+===============================================
+6.Output: Enter two numbers:
+command:
+echo Enter two numbers:
+read num1 num2
+
+if [ "$num1" -gt "$num2" ]; then  
+echo $num1 is greater than $num2
+elif [ "$num1" -eq "$num2" ]; then 
+echo $num1 is equal to $num2
+else
+echo $num1 is less than $num2
+fi
+
+output:
+{ ~ }  » ./prgrm7.sh
+Enter two numbers:
+10 5
+10 is greater than 5
+
+Explanation:
+The script was then run using ./compare.sh. It prompted the user to enter two numbers, which were stored in the variables num1 and num2.
+The script then compared the two numbers using conditional statements:
+If the first number was greater than the second (-gt), it printed:
+"[num1] is greater than [num2]"
+If both numbers were equal (-eq), it printed:
+"[num1] is equal to [num2]"
+If the first number was less than the second (else), it printed:
+"[num1] is less than [num2]"
+
+===================================================================================================================================
+
+7.Create simple calculator using "expr" command as same as the Question 03
+command:
+echo Enter the first number:
+read num1
+echo Enter the second  number:
+read num2
+sum=$(expr $num1 + $num2)
+sub=$(expr $num1 - $num2)
+div=$(expr $num1 / $num2)
+mul=$(expr $num1 \* $num2)
+echo Summation:$sum
+echo Subtraction:$sub
+echo Division:$div
+echo Multiplication:$mul
+
+output:
+{ ~ }  » ./prgrm8.sh
+Enter the first number:
+10
+Enter the second  number:
+5
+Summation:15
+Subtraction:5
+Division:2
+Multiplication:50
+
+Explanation:
+First, a new file was created using the command vi calc2.sh. The given code was typed into the file, and then it was saved and closed using the command :wq. 
+After that, the file’s permission was changed to 777 using the command chmod 777 calc2.sh, so that anyone could read, write, and execute the file.
+The script was then run using ./calc2.sh. It first prompted the user to enter the first number
+, and then to enter the second number. These values were stored in the variables num1 and num2.
+Using the expr command, the script performed four arithmetic operations:
+Addition of the two numbers, stored in sum
+Subtraction (first minus second), stored in sub
+Division (first divided by second), stored in div
+Multiplication, stored in mul (note: * was escaped with a backslash \ to avoid shell interpretation)
+Finally, the script displayed the results of all four operations: Summation,Subtraction,Division,Multiplication.
