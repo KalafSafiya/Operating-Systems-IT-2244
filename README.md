@@ -1,162 +1,273 @@
-Operating-Systems-IT-2244 Day 02
+Operating-Systems-IT-2244 Day 03
 
-21st of March 2025
-Operating Systems IT 2244 
-Day 03 Practical
+Operating Systems IT 2244
+Day 04 Practical
+24/03/2025
 
-TAB SEPERATED FILES IN LINUX
-=============================
+Implementation:
 
-01.Creating a TSV file
-----------------------
-command: vi abc.tsv
-Opens the vi text editor to create or edit the abc.tsv file.
-
-Steps:
-1.Type vi abc.tsv to open the editor.
-2.Press i to enter insert mode.
-3.Enter the sample data:sample data entered:
-
-11	22	44	55
-88	99	77	55
-22	66	00	33
-11	22	77	88
-
-4.Press Esc, type :wq, and hit Enter to save and exit.
-
-02. Extracting Columns from a TSV File
-
-Extract Column 1 using cut
---------------------------
-command: cut -d $'\t' -f1 abc.tsv
-
-cut: Extracts specific fields from a file.
--d $'\t': Specifies tab (\t) as the delimiter.
--f1: Extracts the first column.
+01.To view the calendar
+------------------------
+command: $cal
+Description: Displays the calendar for the current month (March 2025 in this case).
 
 Output:
-{ ~ }  »  cut -d $'\t' -f1 abc.tsv                                                             
-11
-88
-22
-11
+{ ~ }  » cal                                                                                    ~
+     March 2025
+Su Mo Tu We Th Fr Sa
+                   1
+ 2  3  4  5  6  7  8
+ 9 10 11 12 13 14 15
+16 17 18 19 20 21 22
+23 24 25 26 27 28 29
+30 31
 
-To extract the column 3 using awk
-------------------------------------
-command: awk '{print $3}' abc.tsv
+LINUX DATE COMMANDS
 
-awk: A text-processing tool.
-{print $3}: Prints the third field ($3).
+02.To display day of month
+---------------------------
+Command: date +%d
+Description: Displays the current day of the month (01-31).
 
-Output:
-{ ~ }  » awk '{print $3}' abc.tsv                                                             
-44
-77
-00
-77
-
-03. Displaying Rows from a TSV File
-
-Display the First Two Rows
-----------------------------
-command: head -n 2 abc.tsv
-
-head -n 2: Displays the first 2 lines of the file.
+	explanation of command:
+	date -> Shows the date and time.
+	+%d -> Displays only the day (01-31)
 
 Output:
-{ ~ }  » head -n 2 abc.tsv                                                                    
-11      22      44      55
-88      99      77      55
+{ ~ }  » date +%d                                                                            
+24
 
-
-To Display last 2 rows of a tsv file
-------------------------------------
-command: tail -n 2 abc.tsv
-
-tail -n 2: Displays the last 2 lines of the file.
-
-Output:
-{ ~ }  » tail -n 2 abc.tsv                                                                    
-22      66      00      33
-11      22      77      88
-
-Display the 4th Row
---------------------
-command: head -n 4 abc.tsv | tail -n 1
-
-head -n 4 abc.tsv: Displays the first 4 lines of the abc.tsv file.
-tail -n 1: From those first 4 lines, it displays only the last line (the 4th line).
-
-output:
-{ ~ }  » head -n 4 abc.tsv | tail -n 1                                                        
-11      22      77      88
-
-04. Displaying Entire Content of a TSV File
+03.To display the last two digits of the Year
 ---------------------------------------------
-awk '{print}' abc.tsv
+Command: date +%y
+Description: Displays the last two digits of the current year.
 
-{print}: Prints each line of the file.
+	explanation of command:
+	date → Shows the date and time.
+	+%y → Displays the last two digits of the year (00-99)
 
 Output:
-{ ~ }  » awk '{print}' abc.tsv                                                                
-11      22      44      55
-88      99      77      55
-22      66      00      33
-11      22      77      88
+{ ~ }  » date +%y                                                                            
+25
 
-To display the number of fields in a file
+
+04.To display the full weekday name
+------------------------------------
+Command: date +%A
+Description: Displays the full name of the current weekday.
+
+	explanation of command:
+	date → Shows the date and time.
+	+%A → Displays the full name of the weekday (eg: Sunday, Monday)
+
+Output:
+{ ~ }  » date +%A                                                                             
+Tuesday
+
+
+05.To display the Abbreviated Weekday Name
 -------------------------------------------
+Command: date +%a
+Description: Displays the abbreviated name of the current weekday (e.g., Mon, Tue, Wed).
 
-awk '{print NF; exit}' abc.tsv
-
-awk: A powerful text-processing tool.
-NF: Represents the Number of Fields (columns) in the current line.
-exit: Stops further processing after the first line is read.
-
-Output:
-{ ~ }  » awk '{print NF; exit}' abc.tsv                                                       
-4
-
-
-To retrieve the number of lines in a file
------------------------------------------
-
-wc -l abc.tsv
-
-wc -l: Counts the number of lines in the file.
+	explanation of command:
+	date → Shows the date and time.
+	+%a → Displays the abbreviated weekday name (e.g., Sun, Mon)
 
 Output:
-{ ~ }  » wc -l abc.tsv                                                                        
-4 abc.tsv
+{ ~ }  » date +%a                                                                             
+Tue
 
-06. Searching Specific Content in a TSV File
 
-To display the lines containing '88' from lines 1 to 5
----------------------------------------------------------
+06.To display the Abbreviated Month Name
+-------------------------------------------
+Command: date +%b
+Description: Displays the abbreviated name of the current month (e.g., Jan, Feb, Mar).
 
-head -n 5 abc.tsv | grep '88'
-
-head -n 5 abc.tsv: Displays the first 5 lines of the abc.tsv file.
-grep 'C': Filters and displays only the lines that contain the letter 'C'.
+	explanation of command:
+	date → Shows the date and time.
+	+%b → Displays the abbreviated month name (e.g., Jan, Feb)
 
 Output:
-{ ~ }  » head -n 5 abc.tsv | grep '88'                                                        
-88      99      77      55
-11      22      77      88
+{ ~ }  » date +%b                                                                             
+Mar
 
 
-Count Fields Using awk with Tab Separator
-------------------------------------------
-awk -F '\t' '{print NF; exit}' abc.tsv
+07.To display the Full Month Name
+-------------------------------------------
+Command: date +%B
+Description: Displays the full name of the current month.
 
--F '\t': Specifies the field separator (in this case, tab \t).
-{print NF; exit}:
-NF: Represents the number of fields (columns) in the current line.
-exit: Stops further processing after the first line is read.
+	explanation of command:
+	date → Shows the date and time.
+	+%B → Displays the full month name (e.g., January, February)
 
-Output: 
-{ ~ }  » awk -F '\t' '{print NF; exit}' abc.tsv                                                 ~
-4
+Output:
+{ ~ }  » date +%B                                                                             
+March
+
+
+08.To display the month as a two-digit number
+----------------------------------------------
+Command: date +%m
+Description: Displays the month as a two-digit number (01-12).
+
+	explanation of command:
+	date → Shows the date and time.
+	+%m → Displays the month as a two-digit number (01-12)
+
+Output:
+{ ~ }  » date +%m                                                                             
+03
+
+
+09.To display the minute as a two-digit number
+----------------------------------------------
+Command: date +%M
+Description: %M displays the current minute (00-59).
+
+	explanation of command:
+	date → Displays the system date and time.
+	+%M → Extracts and displays the current minutes (00-59)
+
+Output:
+{ ~ }  » date +%M                                                                             
+06
+
+10.To display the Hour in 24-Hour Format
+-------------------------------------------
+Command: date +%H
+Description: Displays the current hour in 24-hour format (00-23)
+
+	explanation of command:
+	date → Displays the system date and time.
+	+%H → Extracts and displays the current hour in 24-hour format (00-23)
+
+Output:
+{ ~ }  » date +%H                                                                            
+11
+
+
+11.To display Abbreviated Month Name (Alias for %b)
+---------------------------------------------------
+Command: date +%h
+Description: %h is the same as %b, displaying the abbreviated month name.
+
+	explanation of command:
+	date → Displays the system date and time.
+	+%h → Extracts and displays the abbreviated Month name (Jan,Feb,Mar)
+
+Output:
+{ ~ }  » date +%h                                                                           
+Mar
+
+
+CREATING SHELL SCRIPT FILE (.sh)
+---------------------------------
+
+A .sh file is a Shell Script file used in Unix and Linux systems. It contains a series of commands written in Bash (Bourne Again Shell) or other shell languages like sh, zsh, or ksh. These scripts automate tasks, execute multiple commands sequentially, and can include loops, conditions, and functions.
+
+Key Features of .sh Files
+_________________________
+
+Shell Script: A .sh file is a script that runs in a shell environment (e.g., Bash, Zsh).
+
+Automation: Used to automate repetitive tasks.
+
+Executable: Requires execution permissions (chmod +x filename.sh).
+
+Contains Commands: Stores a sequence of shell commands.
+
+Supports Variables, Loops, and Functions: Allows complex scripting.
+
+
+Steps to create and execute a shell Script
+__________________________________________
+
+1.Create a new file using the vi editor.
+eg: vi prgrm1.sh
+
+2.Enter INSERT mode by pressing i and type the script.
+eg: The script used
+	echo "Who are you?"
+	read name
+	echo "Enter Number 1"
+	read x
+	echo "Enter Number 2"
+	read y
+	echo "Enter Number 3"
+	read z
+
+	sum=$(($x+$y+$z))
+	avg=$(($sum/3))
+
+	echo "Hi" $name
+	echo "Summation " $sum
+	echo "Average " $avg
+
+3.Save and exit by pressing Esc, typing :wq, and hitting Enter.
+4.Verify file creation by listing its details.
+eg:
+ls -l prgrm1.sh
+
+5.Grant execution permission to make the script runnable.
+eg: chmod 777 prgrm1.sh
+
+6.Confirm updated permissions to ensure execution rights are granted.
+eg:
+ls -l prgrm1.sh(It should display rwxrwxrwx)
+
+7.Run the script to execute the commands inside it.
+eg:
+./prgrm1.sh
+
+Output:
+{ ~ }  » ./prgrm1.sh                                                                            ~
+who are you?
+Adam
+Enter Number 1
+20
+Enter Number 2
+10
+Enter Number 3
+20
+Hi name
+Summation 50
+Average 16
+
+Reading 2 inputs from user and performing arithmetic operations using shell script
+___________________________________________________________________________________
+
+1.Created a shell script named arithmetic.sh
+	vi arithmetic.sh
+2.Entered the following script
+Script:
+3.Saved file
+4.Granted permission
+	chmod 777 arithmetic.sh
+5.Executed 
+	./arithmetic.sh 
+
+Output:
+{ ~ }  » ./arithmetic.sh                                                                        ~
+Enter Number 1
+20
+Enter Number 2
+2
+Addition 22
+Subtraction 18
+Multiplication 40
+Division 10
+
+
+
+
+
+
+
+
+
+
 
 
 
