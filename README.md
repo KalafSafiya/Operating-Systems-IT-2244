@@ -1,310 +1,256 @@
-Operating-Systems-IT-2244 Day 03
-
 Operating Systems IT 2244
-Day 04 Practical
-24/03/2025
+Day 05 Practical
+28/03/2025
 
-Implementation:
+1)Find the row of data which has the word "Engineering"
+	Command:
+	grep "Engineering" data.csv 
+ 
+	Output:
+	{ ~ }  » grep "Engineering" data.csv                                        
+	102,Bob,25,50000,Engineering
+	105,Eve,28,60000,Engineering
+	108,Hank,32,68000,Engineering
 
-01.To view the calendar
-------------------------
-command: $cal
-Description: Displays the calendar for the current month (March 2025 in this case).
+	Explanation of Command:
+	grep => A command-line tool used to search for a pattern in a file.
+	"Engineering" => The pattern (keyword) to search for.
+	data.csv => The file where grep will search for the pattern.
 
+2)find the number of columns in first row
+	Command: 
+	awk -F, '{print NF; exit}' data.csv 
+	
+	Output:
+	{ ~ }  » awk -F, '{print NF; exit}' data.csv                               
+	5
+	
+	Explanation of Command:
+	awk => A powerful text-processing command in Linux.
+	-F, => Specifies the field separator as a comma (,) (since it's a CSV file).
+	{print NF; exit} =>
+		NF => Number of fields (columns) in the current row.
+		print NF => Prints the number of columns in the row.
+		exit => Stops awk after processing the first row only (prevents reading the entire file).
+
+3)find the number of columns in each row
+	Command:
+	awk -F ',' {print NF}'
+
+	Output:
+	{ ~ }  » awk -F ',' '{print NF}' data.csv                                      
+	5
+	5
+	5
+	5
+	5
+	5
+	5
+	5
+	5
+	5
+	5
+
+	Explanation of Command:
+	awk => A powerful text-processing command in Linux.
+	-F ',' => Specifies comma (,) as the field separator, which is necessary for CSV files.
+	{print NF} =>
+		NF (Number of Fields) => Represents the number of fields (columns) in each row.
+		print NF => Prints the number of fields for every row in the file.
+
+4)Sorting CSV by Salary in Reverse Order Using the sort Command
+	Command:
+	sort -t',' -k4,4r data.csv
+
+	Output:
+	{ ~ }  » sort -t',' -k4,4r data.csv                                           
+	ID,Name,Age,Salary,Department
+	104,David,40,90000,HR
+	103,Charlie,5,80000,Data Science
+	106,Frank,38,75000,HR
+	107,Grace,27,72000,Data Science
+	110,Jack,31,71000,HR
+	101,Alice,30,70000,Data Science
+	108,Hank,32,68000,Engineering
+	109,Ivy,29,62000,Data Science
+	105,Eve,28,60000,Engineering
+	102,Bob,25,50000,Engineering
+
+	Explanation of Command:
+	1. sort:
+	This is the command that sorts the contents of a file. It reads input, processes it, 
+	and returns a sorted version of that input based on the options provided.
+
+	2. -t',':
+	The -t option specifies the delimiter to be used for separating fields (columns) in the file.
+	',' specifies that the delimiter is a comma, which is typical for CSV (Comma Separated Values) files.
+
+	3. -k4,4:
+	The -k option specifies which columns to sort by. It uses a column number to indicate where the sort should start and end.
+	The syntax is -kstart_column,end_column. For example, -k4,4 means:
+	start_column: Start sorting at the third column.
+	end_column: Stop sorting at the third column as well.
+	So -k4,4 tells sort to only sort based on the forth column.
+
+	 r:
+	This option modifies the sort order:
+	r stands for reverse sorting. This means the sorting will be in descending order (largest to smallest).
+
+5)
+
+	Command:
+	sort -t',' -k4,4n data.csv 
+
+	Output:
+	{ ~ }  » sort -t',' -k4,4n data.csv                                          
+	ID,Name,Age,Salary,Department
+	102,Bob,25,50000,Engineering
+	105,Eve,28,60000,Engineering
+	109,Ivy,29,62000,Data Science
+	108,Hank,32,68000,Engineering
+	101,Alice,30,70000,Data Science
+	110,Jack,31,71000,HR
+	107,Grace,27,72000,Data Science
+	106,Frank,38,75000,HR
+	103,Charlie,5,80000,Data Science
+	104,David,40,90000,HR
+
+	Explanation of Command:
+	1.sort:
+	Sorts the contents of the file.
+
+	2.-t',':
+	Specifies that the columns are separated by commas (CSV format).
+
+	3.-k4,4:
+	Sorts by the 4th column (Salary).
+
+	4.-n:
+	Sorts numerically, from smallest to largest.
+	
+	Note:
+	The sort command treats the first row (header) as a string, so it is sorted before numeric values.
+	This is why the header appears at the top when sorting.
+
+6)
+	Command:
+	sort -t',' -k4,4 -r data.csv
+
+	Output:
+	sort -t',' -k4,4 -r data.csv                                                        
+	ID,Name,Age,Salary,Department
+	104,David,40,90000,HR
+	103,Charlie,5,80000,Data Science
+	106,Frank,38,75000,HR
+	107,Grace,27,72000,Data Science
+	110,Jack,31,71000,HR
+	101,Alice,30,70000,Data Science
+	108,Hank,32,68000,Engineering
+	109,Ivy,29,62000,Data Science
+	105,Eve,28,60000,Engineering
+	102,Bob,25,50000,Engineering
+
+	Explanation of Command:
+	1. sort:
+	This command sorts the rows in a file.
+
+	2. -t',':
+	Sets the comma , as the separator for columns (since it’s a CSV file).
+
+	3. -k4,4:
+	Sorts the data based on the 4th column (which is Salary).
+
+	4. -r:
+	Sorts in reverse order (highest to lowest for numbers, or Z to A for text).
+
+	Note:
+	Without -n: If I don’t use the -n flag, the sort will be lexicographical (alphabetical). This can cause problems when salaries have different lengths.
+	For example:
+	If I have "50000" (5 characters) and "9000" (4 characters), the command would compare them as text.
+	"50000" would come before "9000" because '5' comes before '9' alphabetically.
+
+	With -n: Using -n ensures that the sort is numeric. So, the command will correctly compare the values. For instance:
+	"50000" will correctly come after "9000" because 50000 is a higher number than 9000.
+
+7)
+	Command:
+	sort -t',' -k4,4 -n -r data.csv 
+
+	Output:
+	{ ~ }  » sort -t',' -k4,4 -n -r data.csv                                                     
+	104,David,40,90000,HR
+	103,Charlie,5,80000,Data Science
+	106,Frank,38,75000,HR
+	107,Grace,27,72000,Data Science
+	110,Jack,31,71000,HR
+	101,Alice,30,70000,Data Science
+	108,Hank,32,68000,Engineering
+	109,Ivy,29,62000,Data Science
+	105,Eve,28,60000,Engineering
+	102,Bob,25,50000,Engineering
+	ID,Name,Age,Salary,Department
+
+	Explanation of Command:
+	1. sort:
+	This is the command used to sort the rows of a file.
+
+	2. -t',':
+	Specifies that the columns in the file are separated by commas (,), which is typical for CSV files.
+
+	3. -k4,4:
+	Sorts based on the 4th column only, which is Salary in this case.
+
+	4. -n:
+	Sorts numerically (instead of alphabetically), ensuring that numbers are compared based on their value (e.g., 90000 > 50000).
+
+	5. -r:
+	Sorts in reverse order (from highest to lowest).
+
+	Note:
+	The header (ID,Name,Age,...) is at the bottom because:
+	sort treats the header like a normal row.
+	It tries to compare the word "Salary" to the numbers like 90000, 80000
+	Since "Salary" is not a number, it's treated as lowest in a numeric sort.
+
+8)Multi-Level Reverse Sorting in CSV using sort Command
+	Command:
+	sort -t',' -k5,5 -k2,2 -r data.csv 
+
+	Output:
+	{ ~ }  » sort -t',' -k5,5 -k2,2 -r data.csv                                                
+	110,Jack,31,71000,HR
+	106,Frank,38,75000,HR
+	104,David,40,90000,HR
+	108,Hank,32,68000,Engineering
+	105,Eve,28,60000,Engineering
+	102,Bob,25,50000,Engineering
+	ID,Name,Age,Salary,Department
+	109,Ivy,29,62000,Data Science
+	107,Grace,27,72000,Data Science
+	103,Charlie,5,80000,Data Science
+	101,Alice,30,70000,Data Science
+
+	Explanation of Command:
+	1. sort:
+	This is the command used to sort the lines in a file.
+
+	2. -t',':
+	Tells sort that the columns in the file are separated by commas (,), which is common in CSV files.
+
+	3. -k5,5:
+	Sort the rows by the 5th column (which is the Department column).
+
+	4. -k2,2:
+	If two or more rows have the same department, then sort those rows by the 2nd column (Name).
+
+	5. -r:
+	Sort everything in reverse order (Z to A, or highest to lowest).
+
+
+
+Command:
 Output:
-{ ~ }  » cal                                                                                    ~
-     March 2025
-Su Mo Tu We Th Fr Sa
-                   1
- 2  3  4  5  6  7  8
- 9 10 11 12 13 14 15
-16 17 18 19 20 21 22
-23 24 25 26 27 28 29
-30 31
-
-LINUX DATE COMMANDS
-
-02.To display day of month
----------------------------
-Command: date +%d
-Description: Displays the current day of the month (01-31).
-
-	explanation of command:
-	date -> Shows the date and time.
-	+%d -> Displays only the day (01-31)
-
-Output:
-{ ~ }  » date +%d                                                                            
-24
-
-03.To display the last two digits of the Year
----------------------------------------------
-Command: date +%y
-Description: Displays the last two digits of the current year.
-
-	explanation of command:
-	date → Shows the date and time.
-	+%y → Displays the last two digits of the year (00-99)
-
-Output:
-{ ~ }  » date +%y                                                                            
-25
-
-
-04.To display the full weekday name
-------------------------------------
-Command: date +%A
-Description: Displays the full name of the current weekday.
-
-	explanation of command:
-	date → Shows the date and time.
-	+%A → Displays the full name of the weekday (eg: Sunday, Monday)
-
-Output:
-{ ~ }  » date +%A                                                                             
-Tuesday
-
-
-05.To display the Abbreviated Weekday Name
--------------------------------------------
-Command: date +%a
-Description: Displays the abbreviated name of the current weekday (e.g., Mon, Tue, Wed).
-
-	explanation of command:
-	date → Shows the date and time.
-	+%a → Displays the abbreviated weekday name (e.g., Sun, Mon)
-
-Output:
-{ ~ }  » date +%a                                                                             
-Tue
-
-
-06.To display the Abbreviated Month Name
--------------------------------------------
-Command: date +%b
-Description: Displays the abbreviated name of the current month (e.g., Jan, Feb, Mar).
-
-	explanation of command:
-	date → Shows the date and time.
-	+%b → Displays the abbreviated month name (e.g., Jan, Feb)
-
-Output:
-{ ~ }  » date +%b                                                                             
-Mar
-
-
-07.To display the Full Month Name
--------------------------------------------
-Command: date +%B
-Description: Displays the full name of the current month.
-
-	explanation of command:
-	date → Shows the date and time.
-	+%B → Displays the full month name (e.g., January, February)
-
-Output:
-{ ~ }  » date +%B                                                                             
-March
-
-
-08.To display the month as a two-digit number
-----------------------------------------------
-Command: date +%m
-Description: Displays the month as a two-digit number (01-12).
-
-	explanation of command:
-	date → Shows the date and time.
-	+%m → Displays the month as a two-digit number (01-12)
-
-Output:
-{ ~ }  » date +%m                                                                             
-03
-
-
-09.To display the minute as a two-digit number
-----------------------------------------------
-Command: date +%M
-Description: %M displays the current minute (00-59).
-
-	explanation of command:
-	date → Displays the system date and time.
-	+%M → Extracts and displays the current minutes (00-59)
-
-Output:
-{ ~ }  » date +%M                                                                             
-06
-
-10.To display the Hour in 24-Hour Format
--------------------------------------------
-Command: date +%H
-Description: Displays the current hour in 24-hour format (00-23)
-
-	explanation of command:
-	date → Displays the system date and time.
-	+%H → Extracts and displays the current hour in 24-hour format (00-23)
-
-Output:
-{ ~ }  » date +%H                                                                            
-11
-
-
-11.To display Abbreviated Month Name (Alias for %b)
----------------------------------------------------
-Command: date +%h
-Description: %h is the same as %b, displaying the abbreviated month name.
-
-	explanation of command:
-	date → Displays the system date and time.
-	+%h → Extracts and displays the abbreviated Month name (Jan,Feb,Mar)
-
-Output:
-{ ~ }  » date +%h                                                                           
-Mar
-
-
-CREATING SHELL SCRIPT FILE (.sh)
----------------------------------
-
-A .sh file is a Shell Script file used in Unix and Linux systems. It contains a series of commands written in Bash (Bourne Again Shell) or other shell languages like sh, zsh, or ksh. These scripts automate tasks, execute multiple commands sequentially, and can include loops, conditions, and functions.
-
-Key Features of .sh Files
-_________________________
-
-Shell Script: A .sh file is a script that runs in a shell environment (e.g., Bash, Zsh).
-
-Automation: Used to automate repetitive tasks.
-
-Executable: Requires execution permissions (chmod +x filename.sh).
-
-Contains Commands: Stores a sequence of shell commands.
-
-Supports Variables, Loops, and Functions: Allows complex scripting.
-
-
-Steps to create and execute a shell Script
-__________________________________________
-
-1.Create a new file using the vi editor.
-eg: vi prgrm1.sh
-
-2.Enter INSERT mode by pressing i and type the script.
-eg: The script used
-	echo "Who are you?"
-	read name
-	echo "Enter Number 1"
-	read x
-	echo "Enter Number 2"
-	read y
-	echo "Enter Number 3"
-	read z
-
-	sum=$(($x+$y+$z))
-	avg=$(($sum/3))
-
-	echo "Hi" $name
-	echo "Summation " $sum
-	echo "Average " $avg
-
-3.Save and exit by pressing Esc, typing :wq, and hitting Enter.
-4.Verify file creation by listing its details.
-eg:
-ls -l prgrm1.sh
-
-5.Grant execution permission to make the script runnable.
-eg: chmod 777 prgrm1.sh
-
-6.Confirm updated permissions to ensure execution rights are granted.
-eg:
-ls -l prgrm1.sh(It should display rwxrwxrwx)
-
-7.Run the script to execute the commands inside it.
-eg:
-./prgrm1.sh
-
-Output:
-{ ~ }  » ./prgrm1.sh                                                                            ~
-who are you?
-Adam
-Enter Number 1
-20
-Enter Number 2
-10
-Enter Number 3
-20
-Hi name
-Summation 50
-Average 16
-
-Reading 2 inputs from user and performing arithmetic operations using shell script
-___________________________________________________________________________________
-
-1.Created a shell script named arithmetic.sh
-	vi arithmetic.sh
-2.Entered the following script
-Script:
-3.Saved file
-4.Granted permission
-	chmod 777 arithmetic.sh
-5.Executed 
-	./arithmetic.sh 
-
-Output:
-{ ~ }  » ./arithmetic.sh                                                                        ~
-Enter Number 1
-20
-Enter Number 2
-2
-Addition 22
-Subtraction 18
-Multiplication 40
-Division 10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Explanation of Command:
+	
 
 
