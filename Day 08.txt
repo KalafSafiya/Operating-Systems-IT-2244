@@ -1,150 +1,64 @@
-Q1) Write a code for small astrology based on your life path number for that 
-get date of birth from user then calculate life path number. (Use switch case)
+#!/bin/bash
 
-Example:
-	Calculation for life path number:
-					a=date%10
-					b=date/10
-			
-if life path number:
-1.Luck
-2.Carefully do your work
-3.Stronger
-4.Happy
-5.Can get Help
-6.Doubt
-7.Sad
-8.Like
-9.Courage
+# ----------------------------------------
+# 1. Fibonacci Series
+# ----------------------------------------
+# Example Output: 0 1 1 2 3 5 8 13 21 34 55
 
+echo "Fibonacci Series"
+read -p "Enter the number: " num
 
-echo -n "Enter your Birthday (1-31): "
-read date
-
-a=$(($date%10))
-b=$(($date/10))
-c=$(($a+$b))
-
-case $c in
-    1) echo "Luck" ;;
-    2) echo "Carefully do your work" ;;
-    3) echo "Stronger" ;;
-    4) echo "Can get Help" ;;
-    5) echo "Happy" ;;
-    6) echo "Doubt" ;;
-    7) echo "Sad" ;;
-    8) echo "Like" ;;
-    9) echo "Courage" ;;
-    *) echo "Invalid input! Please enter a number between 1 and 31." ;;
-esac
-
-
-
-Syntax for FOR LOOP:
-====================
-
-	for variable in list
-		do
-			commands
-		done
-=====================
-
-Syntax for While Loop:
-=======================
-	while[ condition ]
-		do 
-			commands
-		done
-	
-
-Q2) Give list of Numbers then calculate the summation and multiplication using for loop
-
-Example:
-	1 2 3 4 5
-	
-	summation:15
-	product:120
-
-
-
-sum=0
-product=1
-
-for x in 1 2 3 4 5
-	do
-	sum=$((sum+x))
-	product=$((product*x))
+a=0
+b=1
+for ((i=0; i<=num; i++))
+do
+  echo -n "$a "
+  c=$((a + b))
+  a=$b
+  b=$c
 done
 
-echo "summation: $sum"
-echo "product: $product"	
+echo -e "\n"  # New line for clarity
 
+# ----------------------------------------
+# 2. Factorial Calculation
+# ----------------------------------------
+# Example Output: Factorial of 5 is: 120
 
-Q3) Print the integers from 1 to 10 using while loo
+echo "Factorial Calculator"
+read -p "Enter a number for factorial: " num
 
-count = 1
-while [ $count -le 10 ]
-	do 
-	echo $count
-	count = $(($count +1))
-	done
-	
-Q4) Print below pattern using nested loop
-cols = 7, rows =7
-
-i)	*
-	* *
-	* * *
-	* * * *
-	* * * * *
-	* * * * * *
-	* * * * * * *
-	
-ii)	* * * * * * *
-	* * * * * *
-	* * * * *
-	* * * *
-	* * *
-	* *
-	*
-	
-for((i=0; i<7;i++))
+fact=1
+for ((i=1; i<=num; i++))
 do
- for((j=0;j<i;j++))
-	do
-	 echo -n "*"
-	done
- echo " "
-done 
-	
-echo " "
-
-for((i=7; i>0;i--))
-do
- for((j=i;j>0;j--))
-	do
-	 echo -n "*"
-	done
- echo " "
+  fact=$((fact * i))
 done
 
-1
-2 2
-3 3 3
-4 4 4 4
-5 5 5 5 5
-6 6 6 6 6 6
+echo "Factorial of $num is: $fact"
+echo ""
 
-1 
-1 2
-1 2 3
-1 2 3 4
-1 2 3 4 5
-1 2 3 4 5 6
+# ----------------------------------------
+# 3. Multiples of 3 between 1 and 50
+# ----------------------------------------
+# Example Output: 3 6 9 12 15 ... 48
 
-	     *
-	    * *
-	   * * *
-	  * * * *
-	 * * * * *
-		
+echo "Multiples of 3 from 1 to 50 (Method 1)"
+for ((i=1; i<=50; i++))
+do
+  if (( i % 3 == 0 )); then
+    echo -n "$i "
+  fi
+done
+
+echo -e "\n"
+
+echo "Multiples of 3 from 1 to 50 (Method 2)"
+for ((i=1; i<=50; i++))
+do
+  c=$((i * 3))
+  if (( c <= 50 )); then
+    echo -n "$c "
+  fi
+done
+
+echo -e "\n"
