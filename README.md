@@ -1,6 +1,4 @@
 
-### Summary
-
 This project contains two programs demonstrating process creation and execution using `fork()` in C. Both programs print numbers from 1 to 10, where:
 
 - The **child process** prints numbers **1 to 5** and calculates their sum.
