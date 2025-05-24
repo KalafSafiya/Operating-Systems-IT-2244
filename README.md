@@ -1,4 +1,4 @@
-# Summary of Process Creation Practicals Using `fork()` in C
+## Summary of Process Creation Practicals Using `fork()` in C
 
 This set of practical exercises demonstrates key concepts of process creation and management in Unix-like operating systems using the `fork()` system call in the C programming language.
 
