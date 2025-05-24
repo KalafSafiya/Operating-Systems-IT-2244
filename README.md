@@ -1,21 +1,32 @@
-### Day 13 - 19th of May 2025
+# Summary of Process Creation Practicals Using `fork()` in C
 
-This collection of programs demonstrates basic decision-making and looping concepts in C:
+This set of practical exercises demonstrates key concepts of process creation and management in Unix-like operating systems using the `fork()` system call in the C programming language.
 
-- **If-Else**: Checks if a person is eligible to vote based on age.
-- **Ternary Operator**: Short-hand version of if-else for eligibility check.
-- **Switch Statement**: 
-  - Maps numbers (1-7) to weekdays.
-  - Provides a mini astrology program based on a "life path number".
-- **Loops**:
-  - **While Loop**: Prints numbers 1 to 10.
-  - **For Loop**: 
-    - Generates Fibonacci sequence up to a given term.
-    - Calculates factorial of a number.
-- **String Handling**: Accepts two strings and concatenates them using `strcat()`.
-- **Binary to Decimal Conversion**: Converts a binary input into its decimal form.
-- **Array Operations**: Accepts an array and finds its maximum and minimum values.
-- **Pascal’s Triangle**: Prints Pascal's Triangle using nested loops and combinatorics.
+---
 
-These examples help reinforce conditional logic, iterations, array operations, basic string manipulation, and arithmetic logic in C programming.
+## Practical Overview
 
+1. **Simple Fork and PID Identification**  
+   The first practical explores how a single call to `fork()` creates a child process. It shows how the parent and child processes receive different return values from `fork()`, enabling them to identify themselves and print their respective process IDs.
+
+2. **Fork with Basic Output and PID Display**  
+   The second practical extends the first by printing a message ("Hello World") and then using `fork()` to create a child process. Both parent and child print their process IDs and the fork return value to illustrate how process creation affects program output and process identity.
+
+3. **Parent with Two Child Processes (Sibling Processes)**  
+   The third practical uses two consecutive `fork()` calls from the original parent to create two child (sibling) processes. Each process prints its own process ID and its parent’s process ID to clearly demonstrate the process hierarchy and sibling relationships.
+
+---
+
+## Key Concepts Learned
+
+- **Process Creation:** Using `fork()` to spawn new processes, which duplicate the calling process.
+- **Process Identification:** Using `getpid()` and `getppid()` system calls to retrieve the current process ID and its parent’s process ID, respectively.
+- **Process Hierarchy:** Understanding how parent, child, and sibling processes are related.
+- **Concurrency and Scheduling:** Observing that process execution order is nondeterministic due to operating system scheduling.
+- **Return Values of `fork()`:** Interpreting the return value of `fork()` to distinguish between parent (positive PID) and child (zero) processes.
+
+---
+
+## Overall Summary
+
+Through these practicals, we gain hands-on understanding of how operating systems manage multiple processes, how processes are created and identified, and how process relationships form a hierarchy. These fundamentals are essential for learning about multitasking, process control, and inter-process communication in systems programming.
