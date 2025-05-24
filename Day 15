@@ -1,0 +1,266 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+printf("\nHello World");
+int f=fork();
+int p=getpid();
+printf("\n the pid1 is %d",p);
+printf("\n the pid2 is %d",f);
+return 0;
+}
+
+output:
+Hello World
+ the pid1 is 43934
+ the pid2 is 43935
+ Hello World
+ the pid1 is 43935
+ the pid2 is 0
+ 
+ ==========================================
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+
+int f=fork();
+int p=getpid();
+
+if(f==0){
+printf("\nThis is child%d",f);
+}
+else{
+printf("\nThis is a parent%d",p);
+}
+
+return 0;
+}
+
+output:
+This is a parent3965
+This is child0
+
+==========================================
+
+#include <stdio.h>
+#include <inistd.h>
+
+int main(){
+int f=fork();
+
+if(f==0){
+	 printf("I am child. My parent id is %d. My id is %d\n", getppid(), getpid());
+}
+else{
+	f1=fork();
+	if(f1==0){
+	printf("I am sibling. My parent id is %d. My id is %d\n", getppid(), getpid());
+	}
+	else{
+	printf("I am parent. My parent id is %d. My id is %d\n", getppid(), getpid());
+	}
+}
+
+return 0
+}
+
+output:
+{ ~ }  » ./fork1                                                              ~
+I'm child. My parent id is: 4712. My id is: 6516
+Im sibling.My parent id is: 4712. My id is: 17948
+Im parent. My parent id is: 13880. My id is: 4712
+
+
+===============================================================================================================================================
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+
+fork();
+fork();
+printf("\nHello World");
+}
+
+
+===============================================================================================================================================
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+
+f=fork();
+if(f==0)
+{
+   printf("I'm Child, my pid is %d()\n",getpid());
+}
+else
+{
+   printf("I'm Parent, my pid is %d()\n",getpid());
+	
+}
+
+return 0;
+}
+
+
+[2021ict71@fedora ~]$ ./parentChild
+I'm Parent, my pid is 14598()
+I'm Child, my pid is 14599()
+[2021ict71@fedora ~]$
+
+===============================================================================================================================================
+
+print number from 1 to 10
+1 to 5 should print my child process
+and from 6 to 10 should be parent process
+calculate summation of those numbers 
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+
+        int f=fork();
+        int i,j,sum1=0,sum2=0;
+        if(f==0)
+        {
+                for(i=1;i<=5;i++)
+                {
+                        sum1+=i;
+                        printf("%d Im child\n",i);
+
+                }
+                printf("Sum: %d\n",sum1);
+
+        }
+        else
+        {
+                for(j=6;j<=10;j++)
+                {
+                        sum2+=j;
+                        printf("%d Im parent\n",j);
+
+                }
+                printf("Sum: %d\n",sum2);
+
+
+        }
+
+        return 0;
+}
+
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+
+        int f=fork();
+        int n,sum=0;
+        if(f==0)
+        {
+			n=1;
+
+        }
+        else
+        {
+			n=6;
+        }
+        for(j=n;j<n+5;j++)
+        {
+                sum+=j;
+                if(n==1)
+				{
+					printf("%d Im child\n",i);
+				}
+				else
+				{
+					printf("%d Im parent\n",i);
+					
+				}
+
+        }	
+			printf("Sum: %d\n",sum);
+
+        return 0;
+}
+
+===============================================================================================================================================
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+
+        int f=fork();
+        int j,n,sum=0;
+        if(f==0)
+        {
+                        n=1;
+
+        }
+        else
+        {
+                        n=6;
+        }
+        for(j=n;j<n+5;j++)
+        {
+                sum+=j;
+                if(n==1)
+                                {
+                                        printf("%d Im child\n",j);
+                                }
+                                else
+                                {
+                                        printf("%d Im parent\n",j);
+
+                                }
+
+        }
+                        printf("Sum: %d\n",sum);
+
+        return 0;
+}
+
+Output:
+
+[2021ict71@fedora ~]$ ./ex1
+6 Im parent
+7 Im parent
+8 Im parent
+9 Im parent
+10 Im parent
+Sum: 40
+1 Im child
+2 Im child
+3 Im child
+4 Im child
+5 Im child
+Sum: 15
+
+
+[2021ict71@fedora ~]$ ./ex2
+6 Im parent
+7 Im parent
+8 Im parent
+9 Im parent
+10 Im parent
+Sum: 40
+1 Im child
+2 Im child
+3 Im child
+4 Im child
+5 Im child
+Sum: 15
+
+===============================================================================================================================================
+
+
+
+
+
+
+
