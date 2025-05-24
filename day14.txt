@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+printf("\nHello World");
+int f=fork();
+int p=getpid();
+printf("\n the pid1 is %d",p);
+printf("\n the pid2 is %d",f);
+return 0;
+}
+
+output:
+Hello World
+ the pid1 is 43934
+ the pid2 is 43935
+ Hello World
+ the pid1 is 43935
+ the pid2 is 0
+
+
+Process Creation using `fork()` in C
+
+This program demonstrates how to create a new process using the `fork()` system call and retrieve process IDs using `getpid()` in a Unix/Linux environment.
+
+Description
+
+The `fork()` system call is used to create a new child process. After the fork:
+- The parent receives the PID of the child.
+- The child receives `0`.
+Both processes continue executing the same code after the fork, but with different return values from `fork()`.
+
+Concepts Used
+
+- `fork()` – Creates a new process
+- `getpid()` – Gets the current process ID
+- `printf()` – Prints output to the console
+
+=======================================================================================================================================================
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+
+int f=fork();
+int p=getpid();
+
+if(f==0){
+printf("\nThis is child: %d",f);
+}
+else{
+printf("\nThis is a parent: %d",p);
+}
+
+return 0;
+}
+
+output:
+This is a parent: 3965
+This is child: 0
+
+Process Identification using `fork()` in C
+
+This program demonstrates how to identify parent and child processes after a `fork()` system call in C.
+
+Description
+
+- The `fork()` function is used to create a new process.
+- After `fork()`, both the parent and child processes continue executing the same code.
+- The return value of `fork()` helps distinguish between them:
+  - In the **child process**, `fork()` returns `0`.
+  - In the **parent process**, `fork()` returns the process ID (PID) of the child.
+
+
+
+
+========================================================================================================================================================
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(){
+int f=fork();
+
+if(f==0){
+	 printf("I am child. My parent id is %d. My id is %d\n", getppid(), getpid());
+}
+else{
+	int f1=fork();
+	if(f1==0){
+	printf("I am sibling. My parent id is %d. My id is %d\n", getppid(), getpid());
+	}
+	else{
+	printf("I am parent. My parent id is %d. My id is %d\n", getppid(), getpid());
+	}
+}
+
+return 0
+}
+
+output:
+{ ~ }  » ./fork1                                                              ~
+I'm child. My parent id is: 4712. My id is: 6516
+Im sibling.My parent id is: 4712. My id is: 17948
+Im parent. My parent id is: 13880. My id is: 4712
+
+Multiple Process Creation using `fork()` in C
+
+This program demonstrates how a process can create multiple child processes using the `fork()` system call and how to identify each process using `getpid()` and `getppid()`.
+
+Description
+
+- The program creates three separate processes:
+  1. The original parent process
+  2. A child process using the first `fork()`
+  3. A sibling (second child) using the second `fork()` within the parent
+
+- Each process prints its process ID and the parent process ID using `getpid()` and `getppid()`.
+
+
+
